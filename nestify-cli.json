@@ -1,0 +1,14 @@
+{
+    "resourcePath": "src/resources",
+    "corePath": "src/core",
+    "orm": {
+        "name": "PrismaRepository",
+        "path": "@core/prisma/prisma.repository"
+    },
+    "decorators": {
+        "controller": {
+            "name": "Controller",
+            "path": "@nestjs/common"
+        }
+    }
+}

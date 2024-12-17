@@ -1,0 +1,17 @@
+// 상품
+model Product {
+  id            Int       @id @default(autoincrement()) // 아이디
+  state         Int       @db.SmallInt // 상태 (활성화: 1, 비활성화: 2)
+  name          String    @db.VarChar() // 상품명
+  thumbnailUrl  String    @map("thumbnail_url") @db.VarChar() // 썸네일(대표사진) URL
+  content       String    @db.VarChar() // 내용
+  mainPrice     Decimal   @map("main_price") @db.Decimal(12, 0) // 메인 가격
+  discountPrice Decimal   @map("discount_price") @db.Decimal(12, 0) // 할인 가격
+  isDiscount    Boolean   @map("is_discount") // 할인 여부
+  quantity      Int // 수량 0
+  isQuantity    Boolean   @default(true) @map("is_quantity") // 수량 사용 여부 (false면, 수량 무제한)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt     DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+
+  @@map("product")
+}
