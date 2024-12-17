@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { LoggerConstant } from './logger.constant';
 import { LoggerFormat } from './logger.format';
 import { LogLevel } from './logger.types';
-import { AppNodeEnv } from '../../types/app-node-env.type';
+import { AppNodeEnv } from '../../utils/types/app-node-env.type';
 
 @Injectable()
 export class LoggerSystem {

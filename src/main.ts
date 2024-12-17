@@ -4,9 +4,9 @@ import { ConfigService } from '@nestjs/config';
 import * as nodeCloudflare from 'node_cloudflare';
 import helmet from 'helmet';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { LoggerService } from './_utils/modules/logger/logger.service';
-import { AppNodeEnv } from './_utils/types/app-node-env.type';
-import { Swagger } from './_utils/swagger/swagger';
+import { LoggerService } from '@core/logger/logger.service';
+import { AppNodeEnv } from './utils/types/app-node-env.type';
+import { Swagger } from './utils/swagger/swagger';
 import { Config } from './config';
 
 export let globalModuleRef: ModuleRef;

@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, HttpException } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ClsService } from 'nestjs-cls';
-import { LoggerService } from '../modules/logger/logger.service';
+import { LoggerService } from '@core/logger/logger.service';
 import { ValidationError } from 'class-validator';
 
 @Catch()

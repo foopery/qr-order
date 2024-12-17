@@ -4,7 +4,7 @@ import { format } from 'winston';
 import * as chalk from 'chalk';
 import { ConfigService } from '@nestjs/config';
 import { ClsService } from 'nestjs-cls';
-import { Config } from '../../../config';
+import { Config } from '../../config';
 import { LoggerConstant } from './logger.constant';
 
 @Injectable()

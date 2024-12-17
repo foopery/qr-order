@@ -2,11 +2,10 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ClsMiddleware, ClsModule } from 'nestjs-cls';
 import * as crypto from 'node:crypto';
 import { ConfigModule } from '@nestjs/config';
-import { LoggerModule } from './_utils/modules/logger/logger.module';
-import { BcryptModule } from './_utils/modules/bcrypt/bcrypt.module';
-import { ValidationPipe } from './_utils/pipes/validation.pipe';
+import { LoggerModule } from '@core/logger/logger.module';
+import { ValidationPipe } from './common/pipes/validation.pipe';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
-import { ExceptionFilter } from './_utils/filters/exception.filter';
+import { ExceptionFilter } from './common/filters/exception.filter';
 import { PrismaModule } from './core/prisma/prisma.module';
 
 @Module({
@@ -23,7 +22,6 @@ import { PrismaModule } from './core/prisma/prisma.module';
                 },
             },
         }),
-        BcryptModule,
         LoggerModule,
         PrismaModule,
     ],

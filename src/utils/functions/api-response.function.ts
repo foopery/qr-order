@@ -1,4 +1,4 @@
-import { ApiMetaInterface } from '../interfaces/api-meta.interface';
+import { ApiMetaInterface } from '../../common/interfaces/api-meta.interface';
 
 export function apiResponse<T>(message: string): { message: string; data: null };
 export function apiResponse<T>(message: string, data: T | null): { message: string; data: T };
