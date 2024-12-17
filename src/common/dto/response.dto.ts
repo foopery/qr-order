@@ -1,3 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { MetadataDto } from '@common/dto/metadata.dto';
+
 export class ApiResponseDto {
     /**
      * 반환 메세지
@@ -10,4 +13,8 @@ export class ApiResponseDto {
      * @example 0
      * */
     code!: number;
+}
+
+export class ApiResponseDtoWithMeta extends ApiResponseDto {
+    meta: MetadataDto;
 }

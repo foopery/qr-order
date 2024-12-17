@@ -7,6 +7,7 @@ import { ValidationPipe } from './common/pipes/validation.pipe';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ExceptionFilter } from './common/filters/exception.filter';
 import { PrismaModule } from './core/prisma/prisma.module';
+import { ProductModule } from '@resources/product/product.module';
 
 @Module({
     imports: [
@@ -24,6 +25,9 @@ import { PrismaModule } from './core/prisma/prisma.module';
         }),
         LoggerModule,
         PrismaModule,
+
+        /** Resources */
+        ProductModule,
     ],
     providers: [
         { provide: APP_PIPE, useClass: ValidationPipe },
