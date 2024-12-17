@@ -29,4 +29,4 @@ FROM node:20-alpine3.20 AS production
 COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/dist ./dist
 
-CMD [ "node", "dist/src/main.js" ]
+CMD [ "node", "dist/main.js" ]
