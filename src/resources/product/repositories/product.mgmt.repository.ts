@@ -24,7 +24,7 @@ export class ProductMgmtRepository extends ProductCommonRepository {
     }
 
     async findUnique(id: number) {
-        return this.prisma.product.findUnique({ where: { id } });
+        return this.prisma.product.findUnique({ where: { id }, include: { optionGroups: { include: { options: true } } } });
     }
 
     async findList(data: ProductMgmtFindListDto) {

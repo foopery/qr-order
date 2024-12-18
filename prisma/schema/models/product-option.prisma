@@ -1,0 +1,12 @@
+// 상품 옵션
+model ProductOption {
+  id        Int       @id @default(autoincrement()) // 아이디
+  groupId   Int       @map("group_id") // 그룹 아이디
+  value     String    @db.VarChar() // 내용 
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+
+  group ProductOptionGroup @relation(fields: [groupId], references: [id]) // 그룹
+
+  @@map("product_option")
+}
