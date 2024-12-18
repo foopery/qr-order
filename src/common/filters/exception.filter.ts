@@ -3,6 +3,7 @@ import { Response, Request } from 'express';
 import { ClsService } from 'nestjs-cls';
 import { LoggerService } from '@core/logger/logger.service';
 import { ValidationError } from 'class-validator';
+import { BaseException } from '@common/exceptions/base.exception';
 
 @Catch()
 export class ExceptionFilter implements ExceptionFilter {
@@ -10,7 +11,7 @@ export class ExceptionFilter implements ExceptionFilter {
         private logger: LoggerService,
         private cls: ClsService,
     ) {}
-    catch(exception: HttpException | Error, host: ArgumentsHost) {
+    catch(exception: BaseException | HttpException | Error, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const req = ctx.getRequest<Request>();
         const res = ctx.getResponse<Response>();
@@ -23,20 +24,28 @@ export class ExceptionFilter implements ExceptionFilter {
             data.set('message', '알 수 없는 오류가 발생하였습니다.');
             data.set('data', null);
             data.set('status', 500);
+            data.set('code', -1);
 
             switch (true) {
-                case exception instanceof HttpException:
+                case exception instanceof HttpException: {
                     const response = exception.getResponse();
                     const message = response['message'] instanceof Array ? response['message'][0] : response['message'];
                     data.set('message', message);
                     data.set('status', response['statusCode']);
                     break;
+                }
+                case exception instanceof BaseException: {
+                    data.set('message', exception.message);
+                    data.set('code', exception.code);
+                    data.set('status', exception.statusCode);
+                    break;
+                }
                 default:
                     this.logger.error(exception.message, exception, this.constructor.name);
                     break;
             }
 
-            const { status, ...body }: { status: number; message: string; data: null } = Object.fromEntries(data);
+            const { status, ...body }: { status: number; message: string; data: null; code: number } = Object.fromEntries(data);
 
             this.logger.http(`{${req.originalUrl}, ${status}, ${req.ip}, ${Date.now() - this.cls.get<number>('now')}ms}`, this.constructor.name, {
                 request: {
@@ -55,7 +64,7 @@ export class ExceptionFilter implements ExceptionFilter {
             return res.status(status).json(body);
         } catch (error) {
             this.logger.error('예외 필터 처리를 실패하였습니다.', error, this.constructor.name);
-            return res.status(500).json({ resultCode: 500000, message: '알 수 없는 오류가 발생하였습니다.', data: null });
+            return res.status(500).json({ code: -1.1, message: '알 수 없는 오류가 발생하였습니다.', data: null });
         }
     }
 }
