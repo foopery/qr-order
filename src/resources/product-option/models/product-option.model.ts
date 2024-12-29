@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsString, IsInt, IsDate } from 'class-validator';
+import { IsString, IsInt, IsDate, IsDecimal } from 'class-validator';
+import { Prisma } from '@prisma/client';
 
 export class ProductOption {
     @ApiProperty({
@@ -20,6 +21,11 @@ export class ProductOption {
     @Type(() => Number)
     @IsInt()
     groupId: number;
+
+    @ApiProperty({ description: '가격', type: String, nullable: false })
+    @IsDecimal()
+    @Type(() => String)
+    price: Prisma.Decimal;
 
     @ApiProperty({
         description: '내용',
