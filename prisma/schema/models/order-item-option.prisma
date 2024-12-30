@@ -9,9 +9,9 @@ model OrderItemOption {
   createdAt            DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
   updatedAt            DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
 
-  item              OrderItem          @relation(fields: [itemId], references: [id]) // 주문 아이템
-  productOptionGrup ProductOptionGroup @relation(fields: [productOptionGroupId], references: [id]) // 상품 옵션 그룹
-  productOption     ProductOption      @relation(fields: [productOptionId], references: [id]) // 상품 옵션
+  item               OrderItem          @relation(fields: [itemId], references: [id]) // 주문 아이템
+  productOptionGroup ProductOptionGroup @relation(fields: [productOptionGroupId], references: [id]) // 상품 옵션 그룹
+  productOption      ProductOption      @relation(fields: [productOptionId], references: [id]) // 상품 옵션
 
   @@map("order_item_option")
 }

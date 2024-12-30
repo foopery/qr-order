@@ -8,6 +8,7 @@ import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ExceptionFilter } from './common/filters/exception.filter';
 import { PrismaModule } from './core/prisma/prisma.module';
 import { ProductModule } from '@resources/product/product.module';
+import { OrderModule } from '@resources/order/order.module';
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import { ProductModule } from '@resources/product/product.module';
 
         /** Resources */
         ProductModule,
+        OrderModule,
     ],
     providers: [
         { provide: APP_PIPE, useClass: ValidationPipe },
