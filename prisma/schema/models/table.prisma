@@ -1,0 +1,11 @@
+// 테이블
+model Table {
+  id        Int       @id @default(autoincrement()) // 아이디
+  name      String    @db.VarChar() // 테이블명
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+
+  order Order[]
+
+  @@map("table")
+}

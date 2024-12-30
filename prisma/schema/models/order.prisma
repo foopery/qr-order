@@ -1,0 +1,13 @@
+// 주문
+model Order {
+  id        Int       @id @default(autoincrement()) // 아이디
+  tableId   Int       @map("table_id") // 테이븖 아이디
+  state     Int       @default(1) @db.SmallInt // 상태 -1: 취소, 1: 접수, 2: 조리중, 3: 완료
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+
+  table Table       @relation(fields: [tableId], references: [id]) // 테이블
+  items OrderItem[] // 아이템
+
+  @@map("order")
+}

@@ -1,0 +1,15 @@
+// 주문 아이템 옵션
+model OrderItemOption {
+  id                   Int       @id @default(autoincrement()) // 아이디
+  productOptionGroupId Int       @map("product_option_group_id") // 상품 옵션 그룹 아이디
+  productOptionId      Int       @map("product_option_id") // 상품 옵션 아이디
+  price                Decimal   @default(0) @db.Decimal(12, 0) // 가격
+  value                String    @db.VarChar() // 내용 
+  createdAt            DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt            DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+
+  productOptionGrup ProductOptionGroup @relation(fields: [productOptionGroupId], references: [id]) // 상품 옵션 그룹
+  productOption     ProductOption      @relation(fields: [productOptionId], references: [id]) // 상품 옵션
+
+  @@map("order_item_option")
+}

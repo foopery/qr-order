@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type, Transform } from 'class-transformer';
 import { IsString, IsInt, IsDate } from 'class-validator';
+import { IsBoolean } from '@common/decorators/is-boolean';
 
 export class ProductOptionGroup {
     @ApiProperty({
@@ -29,6 +30,11 @@ export class ProductOptionGroup {
     @Type(() => Number)
     @IsInt()
     type: number;
+
+    @ApiProperty({ description: '필수 선택 여부', type: Boolean, nullable: false })
+    @Type(() => Boolean)
+    @IsBoolean()
+    isRequired: boolean;
 
     @ApiProperty({
         description: '타이틀',

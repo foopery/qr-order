@@ -1,15 +1,17 @@
 // 상품 그룹
 model ProductOptionGroup {
-  id        Int       @id @default(autoincrement()) // 아이디
-  productId Int       @map("product_id") // 상품 아이디
-  type      Int       @db.SmallInt // 타입 1: 단일 선택, 2: 다중 선택
-  title     String    @db.VarChar() // 타이틀
-  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
-  updatedAt DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
+  id         Int       @id @default(autoincrement()) // 아이디
+  productId  Int       @map("product_id") // 상품 아이디
+  type       Int       @db.SmallInt // 타입 1: 단일 선택, 2: 다중 선택
+  isRequired Boolean   @default(true) // 필수 선택 여부
+  title      String    @db.VarChar() // 타이틀
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
+  updatedAt  DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
 
   product Product @relation(fields: [productId], references: [id]) // 상품
 
-  options ProductOption[] // 옵션
+  options          ProductOption[] // 옵션
+  orderItemOptions OrderItemOption[] // 주문 아이템 옵션
 
   @@map("product_option_group")
 }

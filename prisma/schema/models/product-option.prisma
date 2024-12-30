@@ -7,7 +7,8 @@ model ProductOption {
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3) // 생성일
   updatedAt DateTime? @map("updated_at") @db.Timestamptz(3) // 수정일
 
-  group ProductOptionGroup @relation(fields: [groupId], references: [id]) // 그룹
+  group            ProductOptionGroup @relation(fields: [groupId], references: [id]) // 그룹
+  orderItemOptions OrderItemOption[] // 주문 아이템 옵션
 
   @@map("product_option")
 }
